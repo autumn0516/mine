@@ -1,0 +1,26 @@
+{
+  "name": "cyber-minesweeper",
+  "version": "2.0.0",
+  "description": "赛博朋克风格的移动端扫雷游戏，支持单人模式和多人联机对战，包含酷炫技能系统",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "minesweeper",
+    "game",
+    "multiplayer",
+    "websocket",
+    "cyberpunk",
+    "mobile"
+  ],
+  "author": "Claude Code",
+  "license": "MIT",
+  "dependencies": {
+    "ws": "^8.14.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

@@ -465,3 +465,613 @@ body {
 img {
     pointer-events: none;
 }
+
+/* ========== 新增：联机对战界面样式 ========== */
+
+/* 菜单容器 */
+.menu-container, .lobby-container, .room-container {
+    position: relative;
+    z-index: 1;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 小标题 */
+.neon-title.small {
+    font-size: 1.5rem;
+}
+
+/* 菜单按钮 */
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 350px;
+}
+
+.menu-btn {
+    padding: 20px 40px;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 15px;
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.menu-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.5), rgba(118, 75, 162, 0.5));
+}
+
+.menu-btn:active {
+    transform: translateY(-2px);
+}
+
+/* 玩家名称输入 */
+.player-name-input {
+    width: 100%;
+    max-width: 350px;
+    margin-bottom: 20px;
+}
+
+.player-name-input input {
+    width: 100%;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.player-name-input input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.player-name-input input:focus {
+    outline: none;
+    border-color: #4facfe;
+    box-shadow: 0 0 20px rgba(79, 172, 254, 0.5);
+}
+
+/* 大厅按钮 */
+.lobby-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 350px;
+}
+
+.lobby-btn {
+    padding: 15px 30px;
+    background: linear-gradient(135deg, rgba(79, 172, 254, 0.3), rgba(0, 242, 254, 0.3));
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.lobby-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(79, 172, 254, 0.4);
+}
+
+.lobby-btn:active {
+    transform: translateY(-1px);
+}
+
+.lobby-btn.secondary {
+    background: linear-gradient(135deg, rgba(128, 128, 128, 0.3), rgba(100, 100, 100, 0.3));
+}
+
+/* 房间输入 */
+#room-input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 350px;
+    margin-top: 10px;
+}
+
+#room-input input {
+    width: 100%;
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1rem;
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+#room-input input:focus {
+    outline: none;
+    border-color: #4facfe;
+    box-shadow: 0 0 20px rgba(79, 172, 254, 0.5);
+}
+
+/* 连接状态 */
+.connection-status {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+}
+
+/* 房间信息 */
+.room-info {
+    width: 100%;
+    max-width: 350px;
+    margin-bottom: 20px;
+}
+
+.room-id-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.room-id-code {
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: #00f2fe;
+    text-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+    letter-spacing: 2px;
+}
+
+.copy-btn {
+    padding: 5px 10px;
+    background: rgba(79, 172, 254, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.copy-btn:hover {
+    background: rgba(79, 172, 254, 0.5);
+    transform: scale(1.1);
+}
+
+/* 玩家列表 */
+.players-list {
+    width: 100%;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.player-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.player-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.player-icon {
+    font-size: 1.5rem;
+}
+
+.player-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.player-ready {
+    color: #4facfe;
+    font-size: 0.9rem;
+}
+
+/* 房间按钮 */
+.room-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 350px;
+}
+
+/* 模式指示器 */
+.mode-indicator {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 8px 15px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    font-size: 0.9rem;
+    font-weight: 700;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* 排行榜 */
+.leaderboard {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 15px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.leaderboard-title {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 900;
+    margin-bottom: 10px;
+    color: #00f2fe;
+    text-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+}
+
+.leaderboard-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.leaderboard-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.leaderboard-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(5px);
+}
+
+.leaderboard-item.rank-1 {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 193, 7, 0.3));
+    border: 1px solid rgba(255, 215, 0, 0.5);
+}
+
+.leaderboard-item.rank-2 {
+    background: linear-gradient(135deg, rgba(192, 192, 192, 0.3), rgba(169, 169, 169, 0.3));
+    border: 1px solid rgba(192, 192, 192, 0.5);
+}
+
+.leaderboard-item.rank-3 {
+    background: linear-gradient(135deg, rgba(205, 127, 50, 0.3), rgba(184, 115, 51, 0.3));
+    border: 1px solid rgba(205, 127, 50, 0.5);
+}
+
+.player-rank {
+    font-weight: 900;
+    margin-right: 10px;
+    min-width: 30px;
+}
+
+.player-score {
+    font-weight: 700;
+    color: #00f2fe;
+}
+
+/* 技能栏 */
+.skills-bar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 15px;
+    width: 100%;
+    max-width: 400px;
+    justify-content: center;
+}
+
+.skill-btn {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+}
+
+.skill-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(79, 172, 254, 0.5);
+    border-color: #4facfe;
+}
+
+.skill-btn:active {
+    transform: translateY(-2px) scale(1.02);
+}
+
+.skill-btn.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    filter: grayscale(1);
+}
+
+.skill-btn.disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.skill-icon {
+    font-size: 1.8rem;
+}
+
+.skill-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 22px;
+    height: 22px;
+    background: linear-gradient(135deg, #ff0080, #ff4500);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 900;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* 技能效果动画 */
+.skill-effect-freeze {
+    animation: freeze-pulse 0.5s ease;
+}
+
+@keyframes freeze-pulse {
+    0%, 100% {
+        background: rgba(100, 200, 255, 0.3);
+        transform: scale(1);
+    }
+    50% {
+        background: rgba(100, 200, 255, 0.6);
+        transform: scale(1.05);
+    }
+}
+
+.skill-effect-reveal {
+    animation: reveal-glow 1s ease;
+    border: 2px solid #ffeb3b !important;
+    box-shadow: 0 0 20px rgba(255, 235, 59, 0.8);
+}
+
+@keyframes reveal-glow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(255, 235, 59, 0.8);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(255, 235, 59, 1);
+    }
+}
+
+.skill-effect-bomb {
+    animation: bomb-explosion 0.6s ease;
+}
+
+@keyframes bomb-explosion {
+    0% {
+        transform: scale(1);
+        background: rgba(255, 100, 0, 0.3);
+    }
+    50% {
+        transform: scale(1.5);
+        background: rgba(255, 100, 0, 0.8);
+    }
+    100% {
+        transform: scale(1);
+        background: rgba(255, 100, 0, 0.3);
+    }
+}
+
+.skill-effect-shield {
+    border: 3px solid #4caf50 !important;
+    box-shadow: 0 0 30px rgba(76, 175, 80, 0.8);
+    animation: shield-protect 0.5s ease;
+}
+
+@keyframes shield-protect {
+    0%, 100% {
+        border-color: #4caf50;
+    }
+    50% {
+        border-color: #8bc34a;
+    }
+}
+
+/* 游戏控制按钮 */
+.game-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.control-btn {
+    flex: 1;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+}
+
+.control-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(102, 126, 234, 0.6);
+}
+
+.control-btn:active {
+    transform: translateY(0);
+}
+
+.control-btn.secondary {
+    background: linear-gradient(135deg, rgba(128, 128, 128, 0.5), rgba(100, 100, 100, 0.5));
+}
+
+/* 通知 */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    background: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    border-radius: 10px;
+    border-left: 4px solid #4facfe;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    z-index: 10000;
+    opacity: 0;
+    transform: translateX(400px);
+    transition: all 0.3s ease;
+    max-width: 300px;
+}
+
+.notification.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.notification.error {
+    border-left-color: #ff4444;
+}
+
+.notification.success {
+    border-left-color: #4caf50;
+}
+
+/* 最终排行榜（弹窗中） */
+#final-leaderboard {
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+/* 移动端优化 */
+@media (max-width: 480px) {
+    .neon-title {
+        font-size: 1.5rem;
+    }
+
+    .neon-title.small {
+        font-size: 1.2rem;
+    }
+
+    .menu-btn {
+        padding: 15px 30px;
+        font-size: 1.1rem;
+    }
+
+    .skill-btn {
+        width: 50px;
+        height: 50px;
+    }
+
+    .skill-icon {
+        font-size: 1.5rem;
+    }
+
+    .skill-count {
+        width: 18px;
+        height: 18px;
+        font-size: 0.65rem;
+    }
+
+    .leaderboard {
+        padding: 10px;
+    }
+
+    .notification {
+        right: 10px;
+        top: 10px;
+        max-width: calc(100% - 20px);
+    }
+}
+
+@media (max-width: 360px) {
+    .skills-bar {
+        gap: 5px;
+    }
+
+    .skill-btn {
+        width: 45px;
+        height: 45px;
+    }
+
+    .skill-icon {
+        font-size: 1.3rem;
+    }
+}

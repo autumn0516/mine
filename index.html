@@ -12,13 +12,95 @@
     <!-- 背景粒子容器 -->
     <canvas id="particles"></canvas>
 
-    <!-- 游戏容器 -->
-    <div class="game-container">
-        <!-- 标题 -->
+    <!-- 主菜单 -->
+    <div id="main-menu" class="menu-container">
         <div class="game-header">
             <h1 class="neon-title">
                 <span class="glitch" data-text="CYBER MINESWEEPER">CYBER MINESWEEPER</span>
             </h1>
+        </div>
+
+        <div class="menu-buttons">
+            <button class="menu-btn" id="solo-mode-btn">
+                <span class="btn-glow">🎮 单人模式</span>
+            </button>
+            <button class="menu-btn" id="online-mode-btn">
+                <span class="btn-glow">⚔️ 联机对战</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- 联机大厅 -->
+    <div id="online-lobby" class="lobby-container" style="display: none;">
+        <div class="game-header">
+            <h2 class="neon-title small">
+                <span class="glitch" data-text="ONLINE BATTLE">ONLINE BATTLE</span>
+            </h2>
+        </div>
+
+        <div class="player-name-input">
+            <input type="text" id="player-name" placeholder="输入你的昵称" maxlength="12">
+        </div>
+
+        <div class="lobby-buttons">
+            <button class="lobby-btn" id="create-room-btn">
+                <span class="btn-glow">🏠 创建房间</span>
+            </button>
+            <button class="lobby-btn" id="join-room-btn">
+                <span class="btn-glow">🚪 加入房间</span>
+            </button>
+            <button class="lobby-btn secondary" id="back-to-menu-btn">
+                <span class="btn-glow">⬅️ 返回</span>
+            </button>
+        </div>
+
+        <div id="room-input" style="display: none;">
+            <input type="text" id="room-id-input" placeholder="输入房间 ID">
+            <button class="lobby-btn" id="confirm-join-btn">
+                <span class="btn-glow">确认加入</span>
+            </button>
+        </div>
+
+        <div id="connection-status" class="connection-status">
+            <span id="status-text">🔌 连接中...</span>
+        </div>
+    </div>
+
+    <!-- 房间等待界面 -->
+    <div id="room-waiting" class="room-container" style="display: none;">
+        <div class="game-header">
+            <h2 class="neon-title small">
+                <span class="glitch" data-text="WAITING ROOM">WAITING ROOM</span>
+            </h2>
+        </div>
+
+        <div class="room-info">
+            <div class="room-id-display">
+                <span>房间 ID: </span>
+                <span id="current-room-id" class="room-id-code">----</span>
+                <button id="copy-room-id" class="copy-btn">📋</button>
+            </div>
+        </div>
+
+        <div class="players-list" id="players-list">
+            <!-- 玩家列表将动态生成 -->
+        </div>
+
+        <div class="room-buttons">
+            <button class="lobby-btn" id="start-game-btn" style="display: none;">
+                <span class="btn-glow">🚀 开始游戏</span>
+            </button>
+            <button class="lobby-btn secondary" id="leave-room-btn">
+                <span class="btn-glow">🚪 离开房间</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- 游戏容器 -->
+    <div id="game-container" class="game-container" style="display: none;">
+        <!-- 模式指示器 -->
+        <div id="mode-indicator" class="mode-indicator">
+            <span id="mode-text">单人模式</span>
         </div>
 
         <!-- 游戏信息栏 -->
@@ -32,13 +114,43 @@
                 <div class="info-value" id="timer">0</div>
             </div>
             <div class="info-card">
-                <div class="info-label">🚩 旗帜</div>
-                <div class="info-value" id="flags-count">0</div>
+                <div class="info-label" id="score-label">🚩 旗帜</div>
+                <div class="info-value" id="score-count">0</div>
             </div>
         </div>
 
-        <!-- 难度选择 -->
-        <div class="difficulty-selector">
+        <!-- 排行榜（联机模式） -->
+        <div id="leaderboard" class="leaderboard" style="display: none;">
+            <div class="leaderboard-title">🏆 排行榜</div>
+            <div id="leaderboard-list"></div>
+        </div>
+
+        <!-- 技能栏（联机模式） -->
+        <div id="skills-bar" class="skills-bar" style="display: none;">
+            <div class="skill-btn" data-skill="freeze" title="冰冻所有对手 3 秒">
+                <span class="skill-icon">❄️</span>
+                <span class="skill-count" id="freeze-count">2</span>
+            </div>
+            <div class="skill-btn" data-skill="reveal" title="透视 3x3 区域">
+                <span class="skill-icon">👁️</span>
+                <span class="skill-count" id="reveal-count">2</span>
+            </div>
+            <div class="skill-btn" data-skill="bomb" title="炸开 5x5 区域">
+                <span class="skill-icon">💥</span>
+                <span class="skill-count" id="bomb-count">1</span>
+            </div>
+            <div class="skill-btn" data-skill="shield" title="下次踩雷免伤">
+                <span class="skill-icon">🛡️</span>
+                <span class="skill-count" id="shield-count">1</span>
+            </div>
+            <div class="skill-btn" data-skill="swap" title="交换两个格子">
+                <span class="skill-icon">🔄</span>
+                <span class="skill-count" id="swap-count">1</span>
+            </div>
+        </div>
+
+        <!-- 难度选择（单人模式） -->
+        <div id="difficulty-selector" class="difficulty-selector">
             <button class="diff-btn active" data-level="easy">
                 <span class="btn-glow">简单</span>
             </button>
@@ -55,10 +167,15 @@
             <div id="game-board" class="game-board"></div>
         </div>
 
-        <!-- 新游戏按钮 -->
-        <button class="new-game-btn" id="new-game">
-            <span class="btn-glow">🔄 新游戏</span>
-        </button>
+        <!-- 游戏控制按钮 -->
+        <div class="game-controls">
+            <button class="control-btn" id="new-game">
+                <span class="btn-glow">🔄 新游戏</span>
+            </button>
+            <button class="control-btn secondary" id="exit-game">
+                <span class="btn-glow">🏠 返回菜单</span>
+            </button>
+        </div>
 
         <!-- 说明 -->
         <div class="instructions">
@@ -72,8 +189,20 @@
             <div class="modal-icon" id="modal-icon">🎉</div>
             <h2 id="modal-title">胜利！</h2>
             <p id="modal-message">恭喜你完成了游戏！</p>
+            <div id="final-leaderboard"></div>
             <button class="modal-btn" id="modal-btn">
                 <span class="btn-glow">再来一局</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- 技能选择弹窗 -->
+    <div id="skill-modal" class="modal">
+        <div class="modal-content">
+            <h3 id="skill-title">选择目标</h3>
+            <p id="skill-instruction">请在棋盘上选择目标格子</p>
+            <button class="modal-btn" id="cancel-skill">
+                <span class="btn-glow">取消</span>
             </button>
         </div>
     </div>
@@ -81,6 +210,7 @@
     <!-- 烟花容器 -->
     <canvas id="fireworks"></canvas>
 
+    <script src="multiplayer.js"></script>
     <script src="game.js"></script>
 </body>
 </html>
