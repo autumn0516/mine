@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>💣 赛博扫雷 - Cyber Minesweeper</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 背景粒子容器 -->
+    <canvas id="particles"></canvas>
+
+    <!-- 游戏容器 -->
+    <div class="game-container">
+        <!-- 标题 -->
+        <div class="game-header">
+            <h1 class="neon-title">
+                <span class="glitch" data-text="CYBER MINESWEEPER">CYBER MINESWEEPER</span>
+            </h1>
+        </div>
+
+        <!-- 游戏信息栏 -->
+        <div class="game-info">
+            <div class="info-card">
+                <div class="info-label">💣 地雷</div>
+                <div class="info-value" id="mines-count">10</div>
+            </div>
+            <div class="info-card timer-card">
+                <div class="info-label">⏱ 时间</div>
+                <div class="info-value" id="timer">0</div>
+            </div>
+            <div class="info-card">
+                <div class="info-label">🚩 旗帜</div>
+                <div class="info-value" id="flags-count">0</div>
+            </div>
+        </div>
+
+        <!-- 难度选择 -->
+        <div class="difficulty-selector">
+            <button class="diff-btn active" data-level="easy">
+                <span class="btn-glow">简单</span>
+            </button>
+            <button class="diff-btn" data-level="medium">
+                <span class="btn-glow">中等</span>
+            </button>
+            <button class="diff-btn" data-level="hard">
+                <span class="btn-glow">困难</span>
+            </button>
+        </div>
+
+        <!-- 游戏板 -->
+        <div class="game-board-wrapper">
+            <div id="game-board" class="game-board"></div>
+        </div>
+
+        <!-- 新游戏按钮 -->
+        <button class="new-game-btn" id="new-game">
+            <span class="btn-glow">🔄 新游戏</span>
+        </button>
+
+        <!-- 说明 -->
+        <div class="instructions">
+            <p>💡 <strong>点击</strong>打开方块 | <strong>长按</strong>插旗</p>
+        </div>
+    </div>
+
+    <!-- 胜利/失败弹窗 -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-icon" id="modal-icon">🎉</div>
+            <h2 id="modal-title">胜利！</h2>
+            <p id="modal-message">恭喜你完成了游戏！</p>
+            <button class="modal-btn" id="modal-btn">
+                <span class="btn-glow">再来一局</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- 烟花容器 -->
+    <canvas id="fireworks"></canvas>
+
+    <script src="game.js"></script>
+</body>
+</html>
